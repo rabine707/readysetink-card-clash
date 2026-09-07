@@ -89,7 +89,10 @@ export function CardClash() {
   return (
     <main className="clash-shell">
       <nav className="site-nav">
-        <Link className="wordmark" href="/">ReadySetInk <span>Card Clash</span></Link>
+        <Link className="wordmark" href="/" aria-label="ReadySetInk Card Clash home">
+          <span className="brand-spark" aria-hidden="true">✦</span>
+          <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
+        </Link>
         <Link href="/rankings">Community Rankings</Link>
       </nav>
       <header className="clash-header">

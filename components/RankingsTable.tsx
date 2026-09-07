@@ -28,7 +28,13 @@ export function RankingsTable() {
 
   return (
     <main className="rankings-shell">
-      <nav className="site-nav"><Link className="wordmark" href="/">ReadySetInk <span>Card Clash</span></Link><Link href="/">Play now</Link></nav>
+      <nav className="site-nav">
+        <Link className="wordmark" href="/" aria-label="ReadySetInk Card Clash home">
+          <span className="brand-spark" aria-hidden="true">✦</span>
+          <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
+        </Link>
+        <Link href="/">Play now</Link>
+      </nav>
       <header className="rankings-header"><p className="eyebrow">THE COMMUNITY&apos;S FAVORITES</p><h1>Community Rankings</h1><p>Every Card Clash vote helps reveal Lorcana&apos;s most-loved cards.</p></header>
       {loading && <div className="loading-card">Counting the votes…</div>}
       {error && <div className="notice" role="alert">{error}</div>}
