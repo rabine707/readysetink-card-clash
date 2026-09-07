@@ -73,13 +73,28 @@ declare
   v_score_left numeric;
   v_new_left numeric;
   v_new_right numeric;
+  v_recent_votes integer;
   v_k constant numeric := 24;
+  v_votes_per_minute constant integer := 30;
 begin
   if p_left_card_id is null or p_right_card_id is null or p_left_card_id = p_right_card_id then
     raise exception 'Two different cards are required' using errcode = '22023';
   end if;
   if p_result is null or p_result not in ('left', 'right', 'tie', 'skip') then
     raise exception 'Invalid Card Clash result' using errcode = '22023';
+  end if;
+
+  -- Serialize requests for one anonymous browser session so concurrent calls
+  -- cannot race past the rolling per-user limit.
+  perform pg_catalog.pg_advisory_xact_lock(
+    pg_catalog.hashtextextended(p_session_id::text, 0)
+  );
+  select count(*) into v_recent_votes
+    from public.card_clash_votes
+    where session_id = p_session_id
+      and created_at > pg_catalog.now() - interval '1 minute';
+  if v_recent_votes >= v_votes_per_minute then
+    raise exception 'CARD_CLASH_RATE_LIMIT' using errcode = 'P0001';
   end if;
 
   -- Consistent lock order prevents concurrent votes from deadlocking.

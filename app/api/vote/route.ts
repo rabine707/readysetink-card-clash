@@ -22,6 +22,12 @@ export async function POST(request: NextRequest) {
       if (error.code === "23505") {
         return NextResponse.json({ error: "This matchup was already counted." }, { status: 409 });
       }
+      if (error.code === "P0001" && error.message.includes("CARD_CLASH_RATE_LIMIT")) {
+        return NextResponse.json(
+          { error: "You’re voting too quickly. Please wait a moment and try again." },
+          { status: 429, headers: { "Retry-After": "60" } }
+        );
+      }
       throw error;
     }
 

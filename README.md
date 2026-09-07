@@ -11,6 +11,7 @@ This project does not import from or write to ReadySetInk. Its database objects 
 - **Skip / Don't Know** logs the skip for product analysis, but does not change ratings or battle statistics.
 - A local anonymous UUID is stored in the browser. There are no accounts or personal rankings in V1.
 - Each matchup has a unique clash ID; database uniqueness prevents retries/double-clicks from counting twice.
+- Each anonymous browser session is limited to 30 recorded choices per rolling minute.
 - Ratings and both cards' statistics update inside one locked Postgres transaction.
 
 ## Local setup
@@ -31,7 +32,7 @@ The browser talks only to the app's route handlers. Route handlers use the serve
 
 `record_card_clash_vote` uses `SECURITY INVOKER`, locks both card rows in stable ID order, inserts the vote, and updates both ratings/stat rows in one transaction. If any statement fails, all changes roll back. Skips are inserted and return before rating/stat changes.
 
-Before production, consider adding an application-level/IP rate limiter to `/api/vote`. Anonymous identifiers deter accidental duplicate submissions but are not strong identity or anti-bot protection.
+The database enforces a rolling per-session rate limit inside the vote transaction. Because V1 has no accounts, a determined user can reset browser storage to obtain a new session; stronger account or network-level controls can be added if abuse appears.
 
 ## Checks
 
