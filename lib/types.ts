@@ -5,6 +5,10 @@ export type ClashCard = {
   image_url: string;
   set_code: string | null;
   set_name: string | null;
+  collector_number: string | null;
+  language: string | null;
+  promo_source: string | null;
+  promo_source_category: string | null;
   ink: string | null;
   rarity: string | null;
   rating: number;

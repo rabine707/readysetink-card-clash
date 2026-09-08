@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const recent = parseRecentIds(request.nextUrl.searchParams.get("recent"));
     const { data, error } = await createSupabaseAdmin()
       .from("card_clash_cards")
-      .select("id,name,version,image_url,set_code,set_name,ink,rarity,rating,battles")
+      .select("id,name,version,image_url,set_code,set_name,collector_number,language,promo_source,promo_source_category,ink,rarity,rating,battles")
       .eq("is_active", true);
 
     if (error) throw error;

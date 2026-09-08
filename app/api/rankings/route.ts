@@ -7,7 +7,7 @@ export async function GET() {
   try {
     const { data, error } = await createSupabaseAdmin()
       .from("card_clash_cards")
-      .select("id,name,version,image_url,set_code,set_name,ink,rarity,rating,wins,losses,ties,battles")
+      .select("id,name,version,image_url,set_code,set_name,collector_number,language,promo_source,promo_source_category,ink,rarity,rating,wins,losses,ties,battles")
       .eq("is_active", true)
       .order("rating", { ascending: false })
       .order("battles", { ascending: false })

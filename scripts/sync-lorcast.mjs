@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { buildLorcanaJsonIndex, normalizeCard } from "./card-data.mjs";
 
 // Unlike `next dev`, a plain Node script does not load Next.js env files.
 // Node 22+ can load the same local file without an extra dependency.
@@ -9,6 +10,7 @@ try {
 }
 
 const apiBase = process.env.LORCAST_API_URL || "https://api.lorcast.com/v0";
+const lorcanaJsonUrl = process.env.LORCANAJSON_API_URL || "https://lorcanajson.org/files/current/en/allCards.json";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!supabaseUrl || !serviceKey) throw new Error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.");
@@ -16,31 +18,12 @@ if (!supabaseUrl || !serviceKey) throw new Error("Set NEXT_PUBLIC_SUPABASE_URL a
 const supabase = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function normalize(card) {
-  const image = card.image_uris?.digital?.large || card.image_uris?.digital?.normal || card.image_uri;
-  if (!card.id || !card.name || !image) return null;
-  return {
-    id: String(card.id),
-    name: card.name,
-    version: card.version || null,
-    image_url: image,
-    set_code: card.set?.code || card.set_code || null,
-    set_name: card.set?.name || card.set_name || null,
-    ink: Array.isArray(card.ink) ? card.ink.join(", ") : card.ink || card.color || null,
-    rarity: card.rarity || null,
-    classifications: card.classifications || [],
-    released_at: card.released_at || card.set?.released_at || null,
-    is_active: true,
-    updated_at: new Date().toISOString()
-  };
-}
-
 async function getJson(url) {
   const response = await fetch(url, {
     headers: { Accept: "application/json", "User-Agent": "CardClash/0.1" }
   });
   if (!response.ok) {
-    throw new Error(`Lorcast returned ${response.status}: ${await response.text()}`);
+    throw new Error(`${new URL(url).hostname} returned ${response.status}: ${await response.text()}`);
   }
   return response.json();
 }
@@ -50,13 +33,24 @@ const setsPayload = await getJson(`${apiBase}/sets`);
 const sets = setsPayload.results || setsPayload.data || [];
 if (!sets.length) throw new Error("Lorcast returned no sets.");
 
+let lorcanaJsonIndex = new Map();
+try {
+  lorcanaJsonIndex = buildLorcanaJsonIndex(await getJson(lorcanaJsonUrl));
+  process.stdout.write(`Loaded ${lorcanaJsonIndex.size} LorcanaJSON records for promo provenance.\n`);
+} catch (error) {
+  process.stderr.write(`LorcanaJSON enrichment unavailable; continuing with Lorcast metadata: ${error.message}\n`);
+}
+
 let total = 0;
 for (const set of sets) {
   const setId = set.id || set.code;
   if (!setId) continue;
   const payload = await getJson(`${apiBase}/sets/${encodeURIComponent(setId)}/cards`);
   const cards = Array.isArray(payload) ? payload : payload.results || payload.data || [];
-  const rows = cards.filter((card) => !card.lang || card.lang === "en").map(normalize).filter(Boolean);
+  const rows = cards
+    .filter((card) => !card.lang || card.lang === "en")
+    .map((card) => normalizeCard(card, lorcanaJsonIndex))
+    .filter(Boolean);
   if (rows.length) {
     const { error } = await supabase.from("card_clash_cards").upsert(rows, { onConflict: "id" });
     if (error) throw error;

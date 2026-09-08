@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ClashCard } from "@/lib/types";
+import { cardProvenanceLine, cardSetLine } from "@/lib/card-metadata";
 
 export function CardChoice({ card, side, disabled, onChoose }: {
   card: ClashCard;
@@ -7,6 +8,7 @@ export function CardChoice({ card, side, disabled, onChoose }: {
   disabled: boolean;
   onChoose: () => void;
 }) {
+  const provenance = cardProvenanceLine(card);
   return (
     <button className={`card-choice card-choice--${side}`} disabled={disabled} onClick={onChoose}>
       <span className="card-frame">
@@ -16,7 +18,8 @@ export function CardChoice({ card, side, disabled, onChoose }: {
       </span>
       <span className="card-name">{card.name}</span>
       {card.version && <span className="card-version">{card.version}</span>}
-      <span className="card-meta">{[card.set_name, card.rarity].filter(Boolean).join(" · ")}</span>
+      <span className="card-meta">{cardSetLine(card)}</span>
+      {provenance && <span className="card-provenance">{provenance}</span>}
     </button>
   );
 }

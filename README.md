@@ -21,10 +21,12 @@ Requirements: Node.js 22 or newer and a Supabase project.
 1. In Supabase, open the SQL Editor and run [`supabase/schema.sql`](supabase/schema.sql).
 2. Copy `.env.example` to `.env.local` and fill in the project URL and service-role key. The service-role key is server-only and must never be prefixed with `NEXT_PUBLIC_`.
 3. Install dependencies with `npm install`.
-4. Cache the English Lorcast print catalog into Supabase with `npm run sync:lorcast`.
+4. Cache the English Lorcast print catalog into Supabase with `npm run sync:lorcast`. The sync also uses LorcanaJSON when available to enrich promotional cards with their known release source; Lorcast remains the canonical card and image source so existing ratings keep their stable IDs.
 5. Start the app with `npm run dev`, then visit `http://localhost:3000`.
 
 Lorcast asks API consumers to cache downloaded card data for at least 24 hours. Run the sync manually after set releases or on a weekly schedule; do not run it on every request.
+
+Card Clash intentionally retains distinct art and promotional prints. Matchmaking groups cards by name and version so equivalent prints cannot face each other or immediately follow one another, while genuinely different artwork variants remain eligible elsewhere in the rotation.
 
 ## Database/security model
 
@@ -56,4 +58,4 @@ No Vercel project, Supabase project, schema, credentials, or scheduled jobs are 
 
 ## Data source and trademarks
 
-Card metadata and images come from [Lorcast](https://lorcast.com/docs/api). Card Clash is a community project and is not published, endorsed, or specifically approved by Disney or Ravensburger. Disney Lorcana TCG names and artwork belong to their respective rights holders.
+Card metadata and images come from [Lorcast](https://lorcast.com/docs/api), with promotional provenance enrichment from [LorcanaJSON](https://lorcanajson.org). Card Clash is a community project and is not published, endorsed, or specifically approved by Disney or Ravensburger. Disney Lorcana TCG names and artwork belong to their respective rights holders.

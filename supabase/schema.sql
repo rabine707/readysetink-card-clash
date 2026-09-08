@@ -8,6 +8,10 @@ create table if not exists public.card_clash_cards (
   image_url text not null,
   set_code text,
   set_name text,
+  collector_number text,
+  language text,
+  promo_source text,
+  promo_source_category text,
   ink text,
   rarity text,
   classifications text[] not null default '{}',
@@ -22,6 +26,12 @@ create table if not exists public.card_clash_cards (
   updated_at timestamptz not null default now(),
   check (battles = wins + losses + ties)
 );
+
+-- Keep existing installations upgradeable when this schema is reapplied.
+alter table public.card_clash_cards add column if not exists collector_number text;
+alter table public.card_clash_cards add column if not exists language text;
+alter table public.card_clash_cards add column if not exists promo_source text;
+alter table public.card_clash_cards add column if not exists promo_source_category text;
 
 create table if not exists public.card_clash_votes (
   id uuid primary key default gen_random_uuid(),

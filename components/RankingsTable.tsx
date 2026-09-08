@@ -3,10 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { cardSetLine } from "@/lib/card-metadata";
 
 type RankedCard = {
   rank: number; id: string; name: string; version: string | null; image_url: string;
-  set_name: string | null; rarity: string | null; rating: number; battles: number;
+  set_code: string | null; set_name: string | null; collector_number: string | null;
+  language: string | null; rarity: string | null; promo_source: string | null;
+  promo_source_category: string | null; rating: number; battles: number;
   wins: number; losses: number; ties: number; winRate: number;
 };
 
@@ -44,7 +47,7 @@ export function RankingsTable() {
           <article className="ranking-row" key={card.id}>
             <div className="rank-number">#{card.rank}</div>
             <div className="rank-image"><Image src={card.image_url} alt="" fill sizes="64px" /></div>
-            <div className="rank-card-info"><strong>{card.name}</strong>{card.version && <span>{card.version}</span>}<small>{[card.set_name, card.rarity].filter(Boolean).join(" · ")}</small></div>
+            <div className="rank-card-info"><strong>{card.name}</strong>{card.version && <span>{card.version}</span>}<small>{cardSetLine(card)}</small></div>
             <div className="rank-stats"><strong>{card.rating.toLocaleString()}</strong><span>rating</span><small>{card.winRate}% wins · {card.battles.toLocaleString()} battles · {card.ties} ties</small></div>
           </article>
         ))}
