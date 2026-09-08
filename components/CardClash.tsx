@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CardChoice } from "./CardChoice";
+import { ThemeToggle } from "./ThemeToggle";
 import type { Matchup, VoteResult } from "@/lib/types";
 
 const SESSION_KEY = "card-clash-session-v1";
@@ -93,7 +94,10 @@ export function CardClash() {
           <span className="brand-spark" aria-hidden="true">✦</span>
           <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
         </Link>
-        <Link href="/rankings">Community Rankings</Link>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <Link className="nav-link" href="/rankings">Community Rankings</Link>
+        </div>
       </nav>
       <header className="clash-header">
         <p className="eyebrow">A LORCANA COMMUNITY PICKER</p>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cardSetLine } from "@/lib/card-metadata";
+import { ThemeToggle } from "./ThemeToggle";
 
 type RankedCard = {
   rank: number; id: string; name: string; version: string | null; image_url: string;
@@ -36,7 +37,10 @@ export function RankingsTable() {
           <span className="brand-spark" aria-hidden="true">✦</span>
           <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
         </Link>
-        <Link href="/">Play now</Link>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <Link className="nav-link" href="/">Play now</Link>
+        </div>
       </nav>
       <header className="rankings-header"><p className="eyebrow">THE COMMUNITY&apos;S FAVORITES</p><h1>Community Rankings</h1><p>Every Card Clash vote helps reveal Lorcana&apos;s most-loved cards.</p></header>
       {loading && <div className="loading-card">Counting the votes…</div>}
