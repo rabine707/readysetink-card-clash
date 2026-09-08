@@ -157,3 +157,19 @@ $$;
 
 revoke execute on function public.record_card_clash_vote(uuid,text,text,text,uuid) from public, anon, authenticated;
 grant execute on function public.record_card_clash_vote(uuid,text,text,text,uuid) to service_role;
+
+create or replace function public.get_card_clash_stats()
+returns table(total_cards bigint, votes_cast bigint, unique_voters bigint)
+language sql
+security invoker
+set search_path = ''
+stable
+as $$
+  select
+    (select count(*) from public.card_clash_cards where is_active),
+    (select count(*) from public.card_clash_votes),
+    (select count(distinct session_id) from public.card_clash_votes);
+$$;
+
+revoke execute on function public.get_card_clash_stats() from public, anon, authenticated;
+grant execute on function public.get_card_clash_stats() to service_role;

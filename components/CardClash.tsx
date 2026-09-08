@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CardChoice } from "./CardChoice";
 import { ThemeToggle } from "./ThemeToggle";
+import { CommunityStats } from "./CommunityStats";
 import type { Matchup, VoteResult } from "@/lib/types";
 
 const SESSION_KEY = "card-clash-session-v1";
@@ -107,6 +108,7 @@ export function CardClash() {
           want—artwork, character, gameplay, nostalgia, rarity, vibes, or just because.
         </p>
       </header>
+      <CommunityStats />
 
       {error && <div className="notice" role="alert">{error} <button onClick={() => void loadMatchup()}>Try again</button></div>}
       {!matchup ? (
