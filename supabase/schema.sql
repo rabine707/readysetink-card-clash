@@ -14,6 +14,7 @@ create table if not exists public.card_clash_cards (
   promo_source_category text,
   ink text,
   rarity text,
+  illustrators text[] not null default '{}',
   classifications text[] not null default '{}',
   released_at date,
   is_active boolean not null default true,
@@ -32,6 +33,7 @@ alter table public.card_clash_cards add column if not exists collector_number te
 alter table public.card_clash_cards add column if not exists language text;
 alter table public.card_clash_cards add column if not exists promo_source text;
 alter table public.card_clash_cards add column if not exists promo_source_category text;
+alter table public.card_clash_cards add column if not exists illustrators text[] not null default '{}';
 
 create table if not exists public.card_clash_votes (
   id uuid primary key default gen_random_uuid(),

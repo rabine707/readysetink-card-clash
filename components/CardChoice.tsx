@@ -19,6 +19,9 @@ export function CardChoice({ card, side, disabled, onChoose }: {
       <span className="card-name">{card.name}</span>
       {card.version && <span className="card-version">{card.version}</span>}
       <span className="card-meta">{cardSetLine(card)}</span>
+      {card.illustrators.length > 0 && (
+        <span className="card-artist">Art by {card.illustrators.join(" & ")}</span>
+      )}
       {provenance && <span className="card-provenance">{provenance}</span>}
     </button>
   );

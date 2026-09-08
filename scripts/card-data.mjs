@@ -53,6 +53,7 @@ export function normalizeCard(card, lorcanaJsonIndex) {
     promo_source_category: enriched?.promoSourceCategory || null,
     ink: Array.isArray(card.ink) ? card.ink.join(", ") : card.ink || card.color || null,
     rarity: card.rarity || null,
+    illustrators: Array.isArray(card.illustrators) ? card.illustrators.filter(Boolean) : [],
     classifications: card.classifications || [],
     released_at: card.released_at || card.set?.released_at || null,
     is_active: true,

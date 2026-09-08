@@ -11,6 +11,7 @@ export type ClashCard = {
   promo_source_category: string | null;
   ink: string | null;
   rarity: string | null;
+  illustrators: string[];
   rating: number;
   battles: number;
 };

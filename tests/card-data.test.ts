@@ -8,6 +8,7 @@ const lorcastPromo = {
   collector_number: "25ja",
   lang: "en",
   rarity: "Promo",
+  illustrators: ["Sample Artist"],
   set: { code: "P1", name: "Promo Set 1" },
   image_uris: { digital: { large: "https://cards.example/mickey.avif" } }
 };
@@ -35,5 +36,10 @@ describe("card catalog normalization", () => {
       promo_source: "Convention exclusive",
       promo_source_category: "Convention"
     });
+  });
+
+  it("keeps illustrator credits from Lorcast", () => {
+    const row = normalizeCard(lorcastPromo, new Map());
+    expect(row?.illustrators).toEqual(["Sample Artist"]);
   });
 });
