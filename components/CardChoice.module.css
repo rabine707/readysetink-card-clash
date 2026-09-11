@@ -1,0 +1,76 @@
+.details {
+  display: flex;
+  width: min(100%, 320px);
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobileMeta {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .name {
+    min-height: 1.75em;
+    margin-top: 8px !important;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    line-height: 1.05 !important;
+  }
+
+  .details {
+    width: 100%;
+    margin-top: 5px;
+    padding: 6px 4px 0;
+    gap: 3px;
+    border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  }
+
+  .version {
+    max-width: 100%;
+    margin-top: 0 !important;
+    overflow: hidden;
+    font-size: 0.63rem !important;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .desktopMeta {
+    display: none !important;
+  }
+
+  .mobileMeta {
+    display: block;
+    max-width: 100%;
+    color: var(--muted);
+    font-size: 0.57rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.025em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .artist {
+    display: none !important;
+  }
+
+  .provenance {
+    display: block;
+    max-width: 100%;
+    margin-top: 1px !important;
+    padding: 2px 6px;
+    overflow: hidden;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.54rem !important;
+    font-weight: 800;
+    line-height: 1.2 !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
