@@ -33,16 +33,16 @@ export function RankingsTable() {
   return (
     <main className="rankings-shell">
       <nav className="site-nav">
-        <Link className="wordmark" href="/" aria-label="ReadySetInk Card Clash home">
+        <Link className="wordmark" href="/" aria-label="ReadySetInk The Ink List home">
           <span className="brand-spark" aria-hidden="true">✦</span>
-          <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
+          <span className="wordmark-copy">Ready Set Ink <small>The Ink List</small></span>
         </Link>
         <div className="nav-actions">
           <ThemeToggle />
           <Link className="nav-link" href="/">Play now</Link>
         </div>
       </nav>
-      <header className="rankings-header"><p className="eyebrow">THE COMMUNITY&apos;S FAVORITES</p><h1>Community Rankings</h1><p>Every Card Clash vote helps reveal Lorcana&apos;s most-loved cards.</p></header>
+      <header className="rankings-header"><p className="eyebrow">THE COMMUNITY&apos;S FAVORITES</p><h1>Community Rankings</h1><p>Every vote on The Ink List helps reveal Lorcana&apos;s most-loved cards.</p></header>
       {loading && <div className="loading-card">Counting the votes…</div>}
       {error && <div className="notice" role="alert">{error}</div>}
       {!loading && !error && cards.length === 0 && <div className="loading-card">No ranked cards yet. Sync Lorcast data, then cast the first vote.</div>}

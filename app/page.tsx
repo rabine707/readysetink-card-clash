@@ -1,3 +1,3 @@
-import { CardClash } from "@/components/CardClash";
+import { InkList } from "@/components/InkList";
 
-export default function HomePage() { return <CardClash />; }
+export default function HomePage() { return <InkList />; }

@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     if (error) throw error;
     if (!data || data.length < 2) {
       return NextResponse.json(
-        { error: "Card Clash needs at least two synced cards." },
+        { error: "The Ink List needs at least two synced cards." },
         { status: 503 }
       );
     }

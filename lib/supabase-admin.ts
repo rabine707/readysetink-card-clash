@@ -6,6 +6,6 @@ export function createSupabaseAdmin() {
   if (!url || !key) throw new Error("Supabase server environment is not configured.");
   return createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
-    global: { headers: { "X-Client-Info": "card-clash-server" } }
+    global: { headers: { "X-Client-Info": "the-ink-list-server" } }
   });
 }

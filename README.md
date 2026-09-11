@@ -1,4 +1,4 @@
-# Card Clash
+# The Ink List
 
 A standalone, mobile-first Lorcana community picker with instant left/right/tie voting, anonymous sessions, Elo-style rankings, and matchup selection that favors similarly rated and under-voted cards.
 
@@ -26,7 +26,7 @@ Requirements: Node.js 22 or newer and a Supabase project.
 
 Lorcast asks API consumers to cache downloaded card data for at least 24 hours. Run the sync manually after set releases or on a weekly schedule; do not run it on every request.
 
-Card Clash intentionally retains distinct art and promotional prints. Matchmaking groups cards by name and version so equivalent prints cannot face each other or immediately follow one another, while genuinely different artwork variants remain eligible elsewhere in the rotation.
+The Ink List intentionally retains distinct art and promotional prints. Matchmaking groups cards by name and version so equivalent prints cannot face each other or immediately follow one another, while genuinely different artwork variants remain eligible elsewhere in the rotation.
 
 ## Database/security model
 
@@ -48,7 +48,7 @@ The pure unit suite covers matchup behavior and request validation. A live datab
 
 ## Deploy to Vercel
 
-1. Create a new Vercel project whose root directory is this `card-clash` folder.
+1. Create a new Vercel project whose root directory is this repository.
 2. Add `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` for Production and Preview.
 3. Deploy. Vercel will run `npm run build` automatically.
 4. Apply `supabase/schema.sql` and run the Lorcast sync before opening traffic.
@@ -58,4 +58,10 @@ No Vercel project, Supabase project, schema, credentials, or scheduled jobs are 
 
 ## Data source and trademarks
 
-Card metadata and images come from [Lorcast](https://lorcast.com/docs/api), with promotional provenance enrichment from [LorcanaJSON](https://lorcanajson.org). Card Clash is a community project and is not published, endorsed, or specifically approved by Disney or Ravensburger. Disney Lorcana TCG names and artwork belong to their respective rights holders.
+Card metadata and images come from [Lorcast](https://lorcast.com/docs/api), with promotional provenance enrichment from [LorcanaJSON](https://lorcanajson.org). The Ink List is a community project and is not published, endorsed, or specifically approved by Disney or Ravensburger. Disney Lorcana TCG names and artwork belong to their respective rights holders.
+
+## Branding and compatibility
+
+The product name is **The Ink List**. The intended future domain is **inklist.readysetink.com**; connecting it requires a separate Vercel domain and DNS update.
+
+The existing repository URL, checkout folder, and linked deployment keep their current names. Database objects and RPCs using the `card_clash_` prefix, the `CARD_CLASH_RATE_LIMIT` error token, matchup IDs, and `card-clash-session-v1` / `card-clash-theme-v1` browser storage keys remain stable for compatibility with existing votes, anonymous sessions, and saved themes. These are technical contracts, not display branding. Routes remain unchanged.

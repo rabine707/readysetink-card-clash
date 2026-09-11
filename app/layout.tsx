@@ -2,8 +2,20 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Card Clash | ReadySetInk",
-  description: "Pick your favorite Disney Lorcana card and shape the community rankings."
+  title: "The Ink List | ReadySetInk",
+  description: "The Ink List: Lorcana, ranked by the community. Pick your favorite Disney Lorcana card and shape the global rankings.",
+  applicationName: "The Ink List",
+  openGraph: {
+    title: "The Ink List | ReadySetInk",
+    siteName: "The Ink List",
+    description: "Lorcana, ranked by the community. Pick your favorite cards and shape The Ink List.",
+    type: "website"
+  },
+  twitter: {
+    card: "summary",
+    title: "The Ink List | ReadySetInk",
+    description: "Lorcana, ranked by the community. Pick your favorite cards and shape The Ink List."
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

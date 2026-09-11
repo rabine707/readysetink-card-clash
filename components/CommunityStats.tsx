@@ -23,7 +23,7 @@ export function CommunityStats() {
   ] as const;
 
   return (
-    <section className="community-stats" aria-label="Card Clash community statistics" aria-live="polite">
+    <section className="community-stats" aria-label="The Ink List community statistics" aria-live="polite">
       {items.map(([value, label]) => (
         <div className="community-stat" key={label}>
           <strong>{value == null ? "—" : value.toLocaleString()}</strong>

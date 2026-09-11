@@ -1,4 +1,4 @@
--- Card Clash owns only objects prefixed with card_clash_.
+-- The Ink List owns only objects prefixed with card_clash_.
 create extension if not exists pgcrypto;
 
 create table if not exists public.card_clash_cards (
@@ -93,7 +93,7 @@ begin
     raise exception 'Two different cards are required' using errcode = '22023';
   end if;
   if p_result is null or p_result not in ('left', 'right', 'tie', 'skip') then
-    raise exception 'Invalid Card Clash result' using errcode = '22023';
+    raise exception 'Invalid vote result' using errcode = '22023';
   end if;
 
   -- Serialize requests for one anonymous browser session so concurrent calls

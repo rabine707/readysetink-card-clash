@@ -18,7 +18,7 @@ function getSessionId() {
   return id;
 }
 
-export function CardClash() {
+export function InkList() {
   const [matchup, setMatchup] = useState<Matchup | null>(null);
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -89,18 +89,18 @@ export function CardClash() {
   }, [vote]);
 
   return (
-    <main className="clash-shell">
+    <main className="ink-list-shell">
       <nav className="site-nav">
-        <Link className="wordmark" href="/" aria-label="ReadySetInk Card Clash home">
+        <Link className="wordmark" href="/" aria-label="ReadySetInk The Ink List home">
           <span className="brand-spark" aria-hidden="true">✦</span>
-          <span className="wordmark-copy">Ready Set Ink <small>Card Clash</small></span>
+          <span className="wordmark-copy">Ready Set Ink <small>The Ink List</small></span>
         </Link>
         <div className="nav-actions">
           <ThemeToggle />
           <Link className="nav-link" href="/rankings">Community Rankings</Link>
         </div>
       </nav>
-      <header className="clash-header">
+      <header className="ink-list-header">
         <p className="eyebrow">A LORCANA COMMUNITY PICKER</p>
         <h1>Which card do you like more?</h1>
         <p>

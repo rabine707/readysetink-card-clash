@@ -20,7 +20,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function getJson(url) {
   const response = await fetch(url, {
-    headers: { Accept: "application/json", "User-Agent": "CardClash/0.1" }
+    headers: { Accept: "application/json", "User-Agent": "InkList/0.1" }
   });
   if (!response.ok) {
     throw new Error(`${new URL(url).hostname} returned ${response.status}: ${await response.text()}`);
@@ -59,4 +59,4 @@ for (const set of sets) {
   }
   await sleep(100);
 }
-process.stdout.write(`Card Clash sync complete: ${total} cards.\n`);
+process.stdout.write(`The Ink List sync complete: ${total} cards.\n`);
