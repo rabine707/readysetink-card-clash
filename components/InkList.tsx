@@ -133,7 +133,7 @@ export function InkList() {
       )}
       <section className="about-strip">
         <p className="eyebrow">HOW IT WORKS</p>
-        <p>Every pick adjusts both cards with an Elo-style rating. Close matches and lesser-seen cards appear more often, helping the community ranking get smarter with every clash.</p>
+        <p>Every pick adjusts both cards with an Elo-style rating. Close matches and lesser-seen cards appear more often. Every pick moves the list.</p>
       </section>
     </main>
   );
