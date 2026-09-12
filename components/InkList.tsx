@@ -97,6 +97,7 @@ export function InkList() {
         </Link>
         <div className="nav-actions">
           <ThemeToggle />
+          <a className="nav-link" href="https://readysetink.com/">Back to ReadySetInk</a>
           <Link className="nav-link" href="/rankings">Community Rankings</Link>
         </div>
       </nav>

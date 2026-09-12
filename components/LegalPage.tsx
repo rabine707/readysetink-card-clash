@@ -19,6 +19,7 @@ export function LegalPage({ eyebrow, title, updated = "September 12, 2026", chil
         </Link>
         <div className="nav-actions">
           <ThemeToggle />
+          <a className="nav-link" href="https://readysetink.com/">Back to ReadySetInk</a>
           <Link className="nav-link" href="/">Play now</Link>
         </div>
       </nav>
