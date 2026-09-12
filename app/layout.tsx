@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "The Ink List | ReadySetInk",
@@ -24,7 +25,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{document.documentElement.dataset.theme=localStorage.getItem("card-clash-theme-v1")==="neon"?"neon":"rsi"}catch{}` }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <div className="site-page">{children}</div>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
