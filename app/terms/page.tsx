@@ -69,7 +69,7 @@ export default function TermsPage() {
       <h2>Contact and updates</h2>
       <p>
         Questions about these Terms can be sent through
-        <a href="https://readysetink.com/"> readysetink.com</a>. We may update these
+        <a href="mailto:Lorcana707@gmail.com"> Lorcana707@gmail.com</a>. We may update these
         Terms, and continued use after an update means you accept the revised Terms.
       </p>
     </LegalPage>

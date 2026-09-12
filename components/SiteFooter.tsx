@@ -9,7 +9,7 @@ export function SiteFooter() {
           <Link href="/terms">Terms</Link>
           <Link href="/cookies">Cookies &amp; Storage</Link>
           <Link href="/legal">Legal</Link>
-          <a href="https://readysetink.com/">Contact</a>
+          <a href="mailto:Lorcana707@gmail.com">Contact</a>
         </nav>
         <p>© 2026 Ready Set Ink. All rights reserved.</p>
         <p className="fan-disclaimer">

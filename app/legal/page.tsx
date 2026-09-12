@@ -41,7 +41,7 @@ export default function LegalNoticePage() {
       <p>
         Rights holders with a good-faith concern about material displayed on The Ink
         List can contact Ready Set Ink through
-        <a href="https://readysetink.com/"> readysetink.com</a>. Please identify the
+        <a href="mailto:Lorcana707@gmail.com"> Lorcana707@gmail.com</a>. Please identify the
         material and explain the basis of the request so it can be reviewed promptly.
       </p>
     </LegalPage>

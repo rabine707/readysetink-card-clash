@@ -68,7 +68,7 @@ export default function PrivacyPage() {
       <h2>Contact and changes</h2>
       <p>
         To ask a privacy question or make a request, contact Ready Set Ink through
-        <a href="https://readysetink.com/"> readysetink.com</a>. We may update this
+        <a href="mailto:Lorcana707@gmail.com"> Lorcana707@gmail.com</a>. We may update this
         policy when the service or applicable requirements change. The date above
         shows the latest revision.
       </p>
