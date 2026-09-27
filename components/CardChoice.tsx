@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isLorcastCardImage } from "@/lib/card-image";
 import type { ClashCard } from "@/lib/types";
 import { cardProvenanceLine, cardSetLine } from "@/lib/card-metadata";
 import styles from "./CardChoice.module.css";
@@ -20,7 +21,9 @@ export function CardChoice({ card, side, disabled, onChoose }: {
     <button className={`card-choice card-choice--${side}`} disabled={disabled} onClick={onChoose}>
       <span className="card-frame">
         <Image src={card.image_url} alt={`${card.name}${card.version ? ` — ${card.version}` : ""}`} fill
-          sizes="(max-width: 700px) 44vw, 360px" priority={side === "left"} />
+          unoptimized={isLorcastCardImage(card.image_url)}
+          sizes="(max-width: 650px) calc(50vw - 31px), (max-width: 778px) calc(50vw - 57px), 332px"
+          priority={side === "left"} />
         <span className="pick-cue">{side === "left" ? "← Pick left" : "Pick right →"}</span>
       </span>
       <span className={`card-name ${styles.name}`}>{card.name}</span>

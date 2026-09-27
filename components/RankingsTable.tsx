@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { isLorcastCardImage } from "@/lib/card-image";
 import { useEffect, useState } from "react";
 import { cardSetLine } from "@/lib/card-metadata";
 import { ThemeToggle } from "./ThemeToggle";
@@ -51,7 +52,8 @@ export function RankingsTable() {
         {cards.map((card) => (
           <article className="ranking-row" key={card.id}>
             <div className="rank-number">#{card.rank}</div>
-            <div className="rank-image"><Image src={card.image_url} alt="" fill sizes="64px" /></div>
+            <div className="rank-image"><Image src={card.image_url} alt="" fill
+              unoptimized={isLorcastCardImage(card.image_url)} sizes="(max-width: 650px) 39px, 50px" /></div>
             <div className="rank-card-info"><strong>{card.name}</strong>{card.version && <span>{card.version}</span>}<small>{cardSetLine(card)}</small></div>
             <div className="rank-stats"><strong>{card.rating.toLocaleString()}</strong><span>rating</span><small>{card.winRate}% wins · {card.battles.toLocaleString()} battles · {card.ties} ties</small></div>
           </article>
